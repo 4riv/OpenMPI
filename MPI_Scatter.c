@@ -7,7 +7,7 @@
 int main()
 {
     int ID, P, i;
-    int *data, *local_data;
+    int *data, *ldata;
 
     MPI_Init(NULL, NULL);
     MPI_Comm_rank(MPI_COMM_WORLD, &ID);
