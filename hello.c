@@ -1,23 +1,15 @@
 #include <mpi.h>
 #include <stdio.h>
 
-int main()
+int main(int argc, char **argv)
 {
-    int id, x;
+    int size, id;
 
-    MPI_Init(NULL, NULL);
+    MPI_Init(&argc, &argv);
+    MPI_Comm_size(MPI_COMM_WORLD, &size);
     MPI_Comm_rank(MPI_COMM_WORLD, &id);
 
-    // P0 mengirim pesan x ke P1
-    // P1 menerima pesan dari P0, disimpan ke x
-    if (id == 0) {
-        x = 6;
-        MPI_Send(&x, 1, MPI_INT, 1, 0, MPI_COMM_WORLD);
-    }
-    if (id == 1)
-        MPI_Recv(&x, 1, MPI_INT, 0, 0, MPI_COMM_WORLD, NULL);
-
-    printf("P[%d] x: %d\n", id, x);
+    printf("Hello from process %d-of-%d\n", id, size);
 
     MPI_Finalize();
     return 0;
